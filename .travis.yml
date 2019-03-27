@@ -1,0 +1,61 @@
+const int trigPin=8;
+const int echoPin=7;
+int buzzer=11;
+long duration;
+int distance;
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define BLINK_DELAY_MS 1000
+
+int main (void)
+{
+  DDRB |= _BV(DDB0); //pinMode(trigPin, OUTPUT);
+  DDRB |= _BV(DDB4); //pinMode(12,OUTPUT);
+  DDRB |= _BV(DDD2); //pinMode(2,OUTPUT);
+  DDRB |= _BV(DDB3); //pinMode(11,OUTPUT);
+  pinMode(echoPin,INPUT);
+
+}
+
+while(1)
+{
+  PORTB &= ~_BV(PORTB0);//digitalWrite(trigPin, LOW);
+  _delay_ms(BLINK_DELAY_MS);//delayMicroseconds(2);
+  PORTB |= _BV(PORTB0);//digitalWrite(trigPin, HIGH);
+  _delay_ms(BLINK_DELAY_MS);//delayMicroseconds(10);
+  PORTB &= ~_BV(PORTB0);//digitalWrite(trigPin, LOW);
+  duration=pulseIn(echoPin,HIGH);
+  distance=duration*0.034/2;
+
+  //Serial.print(distance);
+  //Serial.println(" ");
+
+
+
+
+
+
+  if(distance<=80 && distance>=30)
+  {
+    PORTD |= _BV(PORTD2);//digitalWrite(2,HIGH);
+  }
+  else
+  {
+    PORTD &= ~_BV(PORTD2);//digitalWrite(2,LOW);
+  }
+  if(distance<=30)
+  {
+    PORTB |= _BV(PORTB4); //digitalWrite(12,HIGH);
+    PORTB |= _BV(PORTB3); //digitalWrite(11,HIGH);
+    _delay_ms(BLINK_DELAY_MS); //delay(1000);
+    PORTB &= ~_BV(PORTB3); //digitalWrite(11,LOW);
+    _delay_ms(BLINK_DELAY_MS); //delay(500);
+
+  }
+  else
+  {
+    PORTB &= ~_BV(PORTB4);//digitalWrite(12,LOW);
+  }
+}
