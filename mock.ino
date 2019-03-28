@@ -56,11 +56,6 @@ void loop()
     delay(500);
     noTone(buzzer);
     delay(250);
-    tone(buzzer,2000);
-    digitalWrite(11,LOW);
-    delay(500);
-    noTone(buzzer);
-    delay(250);
   }
   else
   {
