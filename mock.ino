@@ -1,7 +1,7 @@
 const int trigPin=8;
 const int echoPin=7;
 int buzzer=11;
-long duration;
+long duration;//DURATION
 int distance;
 
 void setup()
